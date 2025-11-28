@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleHub - 트렌디한 패션 편집샵</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Reset & Base */
+        :root {
+            --primary: #111111;
+            --secondary: #333333;
+            --accent: #f43f5e;
+            /* Rose-500 */
+            --bg-light: #f9fafb;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --white: #ffffff;
+            --border: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--primary);
+            color: var(--white);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Badge */
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.2rem 0.6rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+
+        /* Navbar */
+        .navbar {
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--secondary);
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+
+        .nav-icons a:hover {
+            color: var(--accent);
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: var(--white);
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80') no-repeat center center;
+            background-size: cover;
+        }
+
+        .hero-content {
+            width: 50%;
+            padding-left: 10%;
+            z-index: 1;
+        }
+
+        .hero-subtitle {
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            max-width: 400px;
+        }
+
+        /* Categories */
+        .categories {
+            padding: 6rem 0;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .category-item {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            group: cursor;
+        }
+
+        .category-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .category-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .category-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .category-item:hover .category-overlay {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .category-btn {
+            background: var(--white);
+            color: var(--primary);
+            padding: 0.8rem 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .category-item:hover .category-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Products */
+        .products {
+            padding: 6rem 0;
+            background: var(--bg-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .filter-btns {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .filter-btn {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid transparent;
+            transition: 0.3s;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-img {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-actions {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            transition: 0.3s;
+        }
+
+        .product-card:hover .product-actions {
+            bottom: 0;
+        }
+
+        .action-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .action-btn:hover {
+            background: var(--accent);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .product-category {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: var(--text-muted);
+            margin-right: 0.5rem;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        /* Promo */
+        .promo {
+            padding: 6rem 0;
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .promo-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .promo-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .time-box {
+            text-align: center;
+        }
+
+        .time-val {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+            line-height: 1;
+        }
+
+        .time-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        /* Footer */
+        .footer {
+            background: #111;
+            color: #ccc;
+            padding: 5rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand h3 {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .stagger-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .stagger-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .stagger-delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                height: auto;
+                flex-direction: column;
+            }
+
+            .hero-bg {
+                position: relative;
+                width: 100%;
+                height: 400px;
+            }
+
+            .hero-content {
+                width: 100%;
+                padding: 4rem 2rem;
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar reveal">
+        <div class="container nav-content">
+            <a href="#" class="logo">Style<span>Hub</span>.</a>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#shop">Shop</a>
+                <a href="#new">New Arrivals</a>
+                <a href="#sale">Sale</a>
+                <a href="#blog">Blog</a>
+            </div>
+            <div class="nav-icons">
+                <a href="#"><i class="fas fa-search"></i></a>
+                <a href="#"><i class="far fa-user"></i></a>
+                <a href="#" class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">2</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content reveal">
+            <span class="hero-subtitle">New Collection 2024</span>
+            <h1 class="hero-title">Summer<br>Essentials</h1>
+            <p class="hero-desc">이번 시즌 가장 핫한 트렌드를 만나보세요. 편안함과 스타일을 동시에 잡은 새로운 컬렉션.</p>
+            <a href="#shop" class="btn">Shop Now</a>
+        </div>
+        <div class="hero-bg reveal"></div>
+    </section>
+
+    <section class="categories">
+        <div class="container category-grid">
+            <div class="category-item reveal stagger-delay-1">
+                <img src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    alt="Women">
+                <div class="category-overlay">
+                    <a href="#" class="category-btn">Women</a>
+                </div>
+            </div>
+            <div class="category-item reveal stagger-delay-2">
+                <img src="https://images.unsplash.com/photo-1488161628813-99c974c7904e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    alt="Men">
+                <div class="category-overlay">
+                    <a href="#" class="category-btn">Men</a>
+                </div>
+            </div>
+            <div class="category-item reveal stagger-delay-3">
+                <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    alt="Accessories">
+                <div class="category-overlay">
+                    <a href="#" class="category-btn">Accessories</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products" id="shop">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Trending Now</h2>
+                <div class="filter-btns">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Best Sellers</button>
+                    <button class="filter-btn">New</button>
+                    <button class="filter-btn">Sale</button>
+                </div>
+            </div>
+            <div class="product-grid">
+                <div class="product-card reveal stagger-delay-1">
+                    <div class="product-img">
+                        <span class="badge">New</span>
+                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Product">
+                        <div class="product-actions">
+                            <div class="action-btn"><i class="far fa-heart"></i></div>
+                            <div class="action-btn"><i class="fas fa-shopping-cart"></i></div>
+                            <div class="action-btn"><i class="far fa-eye"></i></div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Women</div>
+                        <h3 class="product-title">Floral Summer Dress</h3>
+                        <div class="product-price">₩45,000</div>
+                    </div>
+                </div>
+                <div class="product-card reveal stagger-delay-2">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Product">
+                        <div class="product-actions">
+                            <div class="action-btn"><i class="far fa-heart"></i></div>
+                            <div class="action-btn"><i class="fas fa-shopping-cart"></i></div>
+                            <div class="action-btn"><i class="far fa-eye"></i></div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Men</div>
+                        <h3 class="product-title">Basic White Tee</h3>
+                        <div class="product-price">₩15,000</div>
+                    </div>
+                </div>
+                <div class="product-card reveal stagger-delay-3">
+                    <div class="product-img">
+                        <span class="badge" style="background: #10b981;">-30%</span>
+                        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Product">
+                        <div class="product-actions">
+                            <div class="action-btn"><i class="far fa-heart"></i></div>
+                            <div class="action-btn"><i class="fas fa-shopping-cart"></i></div>
+                            <div class="action-btn"><i class="far fa-eye"></i></div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Accessories</div>
+                        <h3 class="product-title">Classic Leather Watch</h3>
+                        <div class="product-price"><span class="old-price">₩120,000</span> ₩84,000</div>
+                    </div>
+                </div>
+                <div class="product-card reveal stagger-delay-4">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Product">
+                        <div class="product-actions">
+                            <div class="action-btn"><i class="far fa-heart"></i></div>
+                            <div class="action-btn"><i class="fas fa-shopping-cart"></i></div>
+                            <div class="action-btn"><i class="far fa-eye"></i></div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Shoes</div>
+                        <h3 class="product-title">Red Sport Sneakers</h3>
+                        <div class="product-price">₩89,000</div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 4rem;" class="reveal">
+                <a href="#" class="btn btn-outline">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="promo" id="sale">
+        <div class="container promo-content reveal">
+            <h2>End of Season Sale</h2>
+            <p>최대 50% 할인! 이번 시즌 마지막 기회를 놓치지 마세요.</p>
+            <div class="countdown">
+                <div class="time-box">
+                    <span class="time-val">02</span>
+                    <span class="time-label">Days</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-val">14</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-val">32</span>
+                    <span class="time-label">Mins</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-val">45</span>
+                    <span class="time-label">Secs</span>
+                </div>
+            </div>
+            <a href="#" class="btn" style="background: white; color: var(--accent);">Shop Sale</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand reveal">
+                    <h3>StyleHub.</h3>
+                    <p>StyleHub는 최신 트렌드와 고품질의 패션 아이템을 합리적인 가격에 제공합니다. 당신만의 스타일을 완성하세요.</p>
+                    <div style="margin-top: 1.5rem; font-size: 1.2rem;">
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="margin-right: 1rem;"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col reveal stagger-delay-1">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="#">Women</a></li>
+                        <li><a href="#">Men</a></li>
+                        <li><a href="#">Shoes</a></li>
+                        <li><a href="#">Accessories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col reveal stagger-delay-2">
+                    <h4>Help</h4>
+                    <ul>
+                        <li><a href="#">Order Status</a></li>
+                        <li><a href="#">Delivery</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col reveal stagger-delay-3">
+                    <h4>Newsletter</h4>
+                    <p style="margin-bottom: 1rem; font-size: 0.9rem;">신상품 및 세일 소식을 받아보세요.</p>
+                    <div style="display: flex;">
+                        <input type="email" placeholder="Email Address"
+                            style="padding: 0.5rem; width: 100%; border: none;">
+                        <button
+                            style="background: var(--accent); color: white; border: none; padding: 0 1rem; cursor: pointer;">OK</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom reveal">
+                <p>&copy; 2024 StyleHub Fashion. All rights reserved. | Made with Rondasoft Template 9</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const reveals = document.querySelectorAll('.reveal');
+
+            const revealOnScroll = function () {
+                const windowHeight = window.innerHeight;
+                const elementVisible = 100;
+
+                reveals.forEach((reveal) => {
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add('active');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll();
+        });
+    </script>
+</body>
+
+</html>
