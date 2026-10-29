@@ -1,15 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
-    </linearGradient>
-  </defs>
-  
-  <!-- Background circle with gradient -->
-  <circle cx="32" cy="32" r="32" fill="url(#gradient)"/>
-  
-  <!-- Letter R design -->
-  <path d="M 20 18 L 20 46 L 26 46 L 26 35 L 32 35 L 38 46 L 45 46 L 38 34 C 41 33 44 30 44 25 C 44 20 40 18 35 18 Z M 26 24 L 35 24 C 37 24 38 25 38 27 C 38 29 37 30 35 30 L 26 30 Z" 
-        fill="white"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="18" fill="#294c3b"/>
+  <path d="M19 48V25h9v5c2-4 5-6 10-6v9h-3c-5 0-7 3-7 8v7Z" fill="#dbea95"/>
+  <circle cx="43" cy="44" r="4.5" fill="#dbea95"/>
 </svg>
